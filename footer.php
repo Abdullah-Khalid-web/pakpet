@@ -1,8 +1,12 @@
     <footer>
-        <div class="footer-content">
+        <div class="footer-content py-3">
             <div class="footer-logo ">
-                <p>&copy; Pakpet</p>
+                <p>
+                <a class="navbar-brand" href="index.php"><img class="logopic" src="images/logo.png" alt=""> PAKPET</a>
+
+                </p>
                 <p>Project of SE Mafia</p>
+                <p>&copy; Pakpet</p>
             </div>
             <div class="footer-links">
                 <a href="#Home">Home</a>
@@ -27,6 +31,18 @@
 </body>
 
 
+<script>
+    // const loginpop = document.getElementsByClassName('loginpop');
 
+    // function loginpop(){
+    //     alert('Product has been inserted successfully');
+    // }
+// const button =document.getElementById('poplogin');
+// const popup =document.getElementById('popup');
+// button.addEventListener('click',() =>{
+//     popup.style.display = 'block'
+// });
+
+</script>
 
 </html>

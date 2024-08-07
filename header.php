@@ -1,4 +1,5 @@
 <?php
+include 'connection.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -25,7 +26,12 @@ session_start();
             padding: 0;
             margin: 0;
         }
-
+        .red{
+            color: red;
+        }
+        .icon{
+            width: 10px;
+        }
         header {
             background-color: var(--primary-color);
             color: white;
@@ -49,7 +55,7 @@ session_start();
         }
 
         .afterheaderimage {
-            background-image: url('Background.avif');
+            background-image: url('images/Background.avif');
             width: 100%;
             height: 300px;
             background-repeat: no-repeat;
@@ -129,7 +135,7 @@ session_start();
             padding: 0;
             margin: 0 auto;
         }
-        
+
         .container-box {
             max-width: 360px;
             margin: 0 auto;
@@ -143,7 +149,8 @@ session_start();
             border-radius: 8px;
 
         }
-        .container-box h2{
+
+        .container-box h2 {
             width: 100%;
             text-align: center;
         }
@@ -158,7 +165,7 @@ session_start();
 
 
 
-        
+
         /* Product page */
         .porducts {
             align-items: center;
@@ -168,6 +175,7 @@ session_start();
             padding: 0;
             margin: 0 auto;
         }
+
         .porduct-box {
             max-width: 268px;
             margin: 0 auto;
@@ -181,23 +189,28 @@ session_start();
             border-radius: 8px;
 
         }
-        .porduct-box h3{
+
+        .porduct-box h3 {
             width: 100%;
             text-align: center;
         }
+
         .product-box p {
             height: 10px;
-            overflow: hidden;           /* Hide the overflow text */
-            white-space: nowrap;        /* Prevent text from wrapping to the next line */
-            text-overflow: ellipsis;    /* Add an ellipsis ("...") to indicate overflow */
-}
+            overflow: hidden;
+            /* Hide the overflow text */
+            white-space: nowrap;
+            /* Prevent text from wrapping to the next line */
+            text-overflow: ellipsis;
+            /* Add an ellipsis ("...") to indicate overflow */
+        }
 
         .porduct-box img {
             border-radius: 15px;
             width: 100%;
             height: 180px;
             object-fit: contain;
-            
+
             margin-bottom: 10px;
         }
 
@@ -205,28 +218,31 @@ session_start();
             display: flex;
             align-items: left;
         }
-        
-        .addtocart{
-            background-color:orangered;
-            color:white;
-            
+
+        .addtocart {
+            background-color: orangered;
+            color: white;
+
         }
-        .addtocart:hover{
+
+        .addtocart:hover {
             transition: 0.5s;
             background-color: orange;
-            color:white;
-            
+            color: white;
+
         }
-        .butt{
+
+        .butt {
             background-color: var(--primary-color);
-            color:white;
-            
+            color: white;
+
         }
-        .butt:hover{
+
+        .butt:hover {
             transition: 0.5s;
             background-color: var(--secondary-color);
-            color:white;
-            
+            color: white;
+
         }
 
 
@@ -328,7 +344,37 @@ session_start();
             .footer-info {
                 margin-top: 15px;
             }
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* LOGIN SIGN Up */
     </style>
 </head>
 
@@ -336,7 +382,7 @@ session_start();
     <header class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php"><img class="logopic" src="logo.png" alt=""> PAKPET</a>
+                <a class="navbar-brand" href="index.php"><img class="logopic" src="images/logo.png" alt=""> PAKPET</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -369,25 +415,29 @@ session_start();
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                     </ul>
+                    <!-- echo '<button class="btn btn-outline-dark me-2" id="poplogin"  onclick="loginpop()" >Login in</button>
+                    <div id="popup" style="display:none;"> 
+
+                    </div> -->
                     <div class="d-flex align-items-center">
                         <?php
-                        if (!isset($_SESSION['username'])) {
+                        if (!isset($_SESSION['fname'])) {
                             // User is not logged in
-                            echo '<button class="btn btn-outline-dark me-2" type="button">Login</button>
-                                  <button class="btn btn-dark text-white" type="button">Sign Up</button>';
+                            echo '<a class="btn btn-outline-dark me-2"  href="login.php">Login in</a>
+                            <a class="btn btn-dark text-white me-2" href="signup.php">Register</a>';
                         } else {
                             // User is logged in
-                            $username = $_SESSION['username'];
-                            echo '<button class="btn btn-outline-dark me-2" type="button">Add to Cart</button>
-                                  <div class="dropdown ms-3">
-                                  <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($username) . '</a>
-                                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                      <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Go to Cart</a></li>
-                                      <li><a class="dropdown-item" href="#">User Settings</a></li>
-                                      <li><hr class="dropdown-divider"></li>
-                                      <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                                  </ul>
-                                  </div>';
+                            $username = $_SESSION['fname'];
+                            echo '<a href="cart.php" class="btn btn-outline-dark me-2" type="button">Go to Cart</a>
+                                <div class="dropdown ms-3">
+                                <a class="btn btn-dark text-white btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($username) . '</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Go to Cart</a></li>
+                                    <li><a class="dropdown-item" href="user_profile.php"> ' . htmlspecialchars($username) . '`s Profile </a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                </ul>
+                                </div>';
                         }
                         ?>
                     </div>
