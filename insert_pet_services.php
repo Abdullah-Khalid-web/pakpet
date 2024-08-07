@@ -38,7 +38,7 @@ if (isset($_POST['insert_product'])) {
 ?>
 
 <div >
-    <h1 class="text-center mt-3">Pet Poducts</h1>
+    <h1 class="text-center mt-3">Providing Pet Services</h1>
     <!-- form -->
     <form action="" method="post" enctype="multipart/form-data">
         <!-- title -->

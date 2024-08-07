@@ -26,12 +26,15 @@ session_start();
             padding: 0;
             margin: 0;
         }
-        .red{
+
+        .red {
             color: red;
         }
-        .icon{
+
+        .icon {
             width: 10px;
         }
+
         header {
             background-color: var(--primary-color);
             color: white;
@@ -415,10 +418,6 @@ session_start();
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                     </ul>
-                    <!-- echo '<button class="btn btn-outline-dark me-2" id="poplogin"  onclick="loginpop()" >Login in</button>
-                    <div id="popup" style="display:none;"> 
-
-                    </div> -->
                     <div class="d-flex align-items-center">
                         <?php
                         if (!isset($_SESSION['fname'])) {

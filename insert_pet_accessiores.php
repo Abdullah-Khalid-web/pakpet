@@ -1,9 +1,14 @@
 <?php
 include 'connection.php';
 
+
+
+
 if (isset($_POST['insert_product'])) {
-    // need to make the user id refrence
-    // 
+
+    echo "Error: " . $sql . "<br>" . mysqli_error($con);
+
+    $username = $_SESSION['fname'];
     $product_title = $_POST['product_title'];
     $product_description = $_POST['product_description'];
     $product_type = $_POST['product_type'];
@@ -27,7 +32,7 @@ if (isset($_POST['insert_product'])) {
 
 
         // Insert query for products
-        $insert_product = "INSERT INTO `insert_pet` (product_title, product_description, product_keywords, category_id, brand_id, product_image1,  product_price) VALUES ('$product_title', '$product_description', '$product_KeyWords', '$product_category_json', '$product_Image1', '$product_price',`NOW()`,'$product_status')";
+        $insert_product = "INSERT INTO `insert_pet` (product_title, product_description, product_keywords, category_id, brand_id, product_image1,  product_price) VALUES ('$username', '$product_description', '$product_KeyWords', '$product_category_json', '$product_Image1', '$product_price',`NOW()`,'$product_status')";
 
         mysqli_query($con, $insert_product);
         $product_id = mysqli_insert_id($con);
@@ -53,7 +58,7 @@ if (isset($_POST['insert_product'])) {
         <div class="form-outline mb-4 w-50 m-auto">
             <label for="product_description" class="form-label"> Discription<span class="red">*</span></label>
             <textarea type="text" name="product_description" id="product_description" class="form-control"
-                placeholder="Write the details here:....." autocomplete="off" required="required"></>
+                placeholder="Write the details here:....." autocomplete="off" required="required"></textarea>
         </div>
 
         <!-- Product type -->

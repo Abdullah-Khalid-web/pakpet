@@ -24,8 +24,13 @@ if (isset($_POST['submit_registert'])) {
         if (mysqli_query($con, $sql)) {
             move_uploaded_file($temp_Image1, "./product_images/$picturetemp");
             session_start();
+
             $_SESSION['fname'] = $fname; // Replace $fname with the actual variable holding the first name
             $_SESSION['lname'] = $lname; // Replace $lname with the actual variable holding the last name
+
+            $user_id = "SELECT user_id from( select * from `user_registeration` where fnames = $fname) ";
+
+            $_SESSION['user_id'] = $user_id;
 
             header("Location: index.php");
         } else {

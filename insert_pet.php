@@ -1,4 +1,4 @@
-<textarea?php
+<?php
 include 'connection.php';
 
 if (isset($_POST['insert_pet'])) {
@@ -77,9 +77,17 @@ if (isset($_POST['insert_pet'])) {
 
             <!-- Pet Bread -->
             <div class="form-outline mb-4 w-50 m-auto">
-                <label for="pet_bread" class="form-label">Product-title<span class="red">*</span></label>
-                <input type="text" name="pet_bread" id="pet_bread" class="form-control" placeholder="Enter Pet bread"
+                <label for="pet_bread" class="form-label">Product Bread<span class="red">*</span></label>
+                <input list="petbreadoption" type="text" name="pet_bread" id="pet_bread" class="form-control" placeholder="Enter Pet bread"
                     autocomplete="off" required="required">
+                <datalist id="petbreadoption">
+                    <option >Germany</option>
+                    <option >African</option>
+                    <option >Husky</option>
+                    <option >Persian</option>
+                    <option >Husky</option>
+                </datalist>
+
             </div>
 
             <!-- Description -->
@@ -103,7 +111,7 @@ if (isset($_POST['insert_pet'])) {
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="pet_price" class="form-label">Pet Price<span class="red">*</span></label>
                 <input type="text" name="pet_price" id="pet_price" class="form-control"
-                    placeholder="Enter pet price" autocomplete="off" required="required">
+                    placeholder="Enter pet price  (i.e. 1000 Rs)" autocomplete="off" required="required">
                 <br>
                 <button  type="submit" name="insert_pet" style="background-color: #4A919E;" class="  btn btn-primary mb-4 w-100 m-auto">Add For Sell</button>
             </div>

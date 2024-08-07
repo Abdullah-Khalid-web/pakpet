@@ -34,6 +34,11 @@
     </style>
 </head>
 
+<?php
+session_start();
+$_SESSION['fname'] = 'Admin Abdullah ';
+?>
+
 <body>
     <header class="p-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -41,7 +46,10 @@
                 <img class="logopic" src="../logo.png" alt="">
                 <nav class="navbar navbar-expand-lg ">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a href="" class="nav-link">Wellcome Gust</a></li>
+                        <?php
+                        $username = $_SESSION['fname'];
+                        echo '<li class="nav-item"><a href="" class="nav-link">Wellcome ' . htmlspecialchars($username) . '</a></li>
+                        '; ?>
                     </ul>
                 </nav>
             </div>
@@ -59,19 +67,51 @@
         <div class="col-md-12 bg-secondary p-1 d-flex align-item-center ">
             <div class="p-3">
                 <a href="#"><img class="admin-image" src="../cat-8198720_640.webp" alt=""></a>
-                <p class="text-light text-center">Admin Name</p>
+                <p class="text-light text-center">
+                    <?php
+                    $username = $_SESSION['fname'];
+                    echo htmlspecialchars($username);
+                    ?>
+                </p>
             </div>
             <div class="button text-center">
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert_product" class="nav-link text-light my-1 ">Insert Product</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">View Product</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert-category" class="nav-link text-light  my-1">Insert Category</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">View Category</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?pet_types" class="nav-link text-light  my-1">Insert Pet Types</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">View Pet Types</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">All orders</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">All Payment</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">List User</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">Logout</a></button>
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert_product"
+                        class="nav-link text-light my-1 ">Insert Product</a></button>
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                        class="nav-link text-light  my-1">View Product</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert_pet"
+                        class="nav-link text-light my-1 ">Insert Pet</a></button>
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                        class="nav-link text-light  my-1">View Pet</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert_services"
+                        class="nav-link text-light my-1 ">Insert services</a></button>
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                        class="nav-link text-light  my-1">View services</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert-category"
+                        class="nav-link text-light  my-1">Insert Category</a></button>
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                        class="nav-link text-light  my-1">View Category</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?pet_types"
+                        class="nav-link text-light  my-1">Insert Pet Types</a></button>
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                        class="nav-link text-light  my-1">View Pet Types</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">All
+                        orders</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">All
+                        Payment</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                        class="nav-link text-light  my-1">List User</a></button>
+
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                        class="nav-link text-light  my-1">Logout</a></button>
+
             </div>
         </div>
     </div>
@@ -82,14 +122,20 @@
     <!-- Fourth Child -->
     <div class="container">
         <?php
+        if (isset($_GET['insert_pet'])) {
+            include '../insert_pet.php';
+        }
+        if (isset($_GET['insert_services'])) {
+            include '../insert_pet_services.php';
+        }
+        if (isset($_GET['insert_product'])) {
+            include '../insert_pet_accessiores.php';
+        }
         if (isset($_GET['insert-category'])) {
             include 'insert-category.php';
         }
         if (isset($_GET['pet_types'])) {
             include 'pet_type.php';
-        }
-        if (isset($_GET['insert_product'])) {
-            include '../sell_things.php';
         }
         ?>
     </div>
