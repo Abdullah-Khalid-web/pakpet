@@ -271,6 +271,9 @@ session_start();
             text-align: center;
             width: 100%;
             flex-wrap: wrap;
+            /* position: relative;
+            bottom: 0; */
+            /* margin-top: auto; */
         }
 
         .footer-content {
@@ -385,7 +388,7 @@ session_start();
     <header class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php"><img class="logopic" src="images/logo.png" alt=""> PAKPET</a>
+                <a class="navbar-brand active head-button" href="index.php"><img class="logopic " src="images/logo.png" alt=""> PAKPET</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -394,28 +397,26 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                            <a class="nav-link active head-button" href="products.php">Buy Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link head-button" href="products.php">Products</a>
+                            <a class="nav-link head-button active" aria-current="page" href="sell_things.php">Sell Products</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown active head-button">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Categories
-                            </a>
+                                data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Pets</a></li>
-                                <li><a class="dropdown-item" href="#">Pets Accessories</a></li>
-                                <li><a class="dropdown-item" href="#">Pets Clinic</a></li>
+                                <li><a class="dropdown-item" href="view_pets.php">Pets</a></li>
+                                <li><a class="dropdown-item" href="view_pets_products.php">Pets Accessories</a></li>
+                                <li><a class="dropdown-item" href="view_pets_services.php">Pets Clinic</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="sell_things.php">Sell Product</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link active head-button" href="contactus.php">Contact</a>
                         </li>
                     </ul>
                     <div class="d-flex align-items-center">

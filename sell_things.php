@@ -8,13 +8,13 @@
 
         <?php
         if (!isset($_SESSION['fname'])) {
-            // User is not logged in
             echo ' <h2>You Need to Login Fisrt Before Selling any things </h2> ';
-        } else {
+        } 
+        else {
             // User is logged in
             $username = $_SESSION['fname'];
             echo '
-                        <!-- category -->
+            <!-- category -->
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="product-category" class=" b form-label"><b> Choose the Category<span class="red">*</span></b></label>
                 <select name="product-category" onclick="reload()" class="form-select" id="product-category" class="product-category">';
@@ -30,16 +30,18 @@
 
             echo '</select>
             </div>';
+
+
+            include 'insert_pet.php';
+            // include 'insert_pet_accessiores.php';
+            // include 'insert_pet_services.php';
         }
+
+
         ?>
     </div>
 
-    <?php
 
-    // include 'insert_pet.php';
-    include 'insert_pet_accessiores.php';
-    // include 'insert_pet_services.php';
-    ?>
 </main>
 
 <script>

@@ -33,8 +33,14 @@
         }
     </style>
 </head>
-
+<script>
+   
+</script>
 <?php
+
+// echo '<script>. prompt('. include 'admin_login.php' .')</script>';
+
+
 session_start();
 $_SESSION['fname'] = 'Admin Abdullah ';
 ?>
@@ -57,7 +63,7 @@ $_SESSION['fname'] = 'Admin Abdullah ';
     </header>
 
     <div class="bg-light">
-        <h3 class="texr-center p-2">
+        <h3 class="text-center p-2">
             Manage Details
         </h3>
     </div>

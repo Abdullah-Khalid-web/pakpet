@@ -1,20 +1,16 @@
 <?php
 include 'connection.php';
+if (isset($_POST['insert_service'])) {
 
-if (isset($_POST['insert_product'])) {
-    // need to make the user id refrence
-    // 
+    $username = $_SESSION['fname'];
     $service_name = $_POST['service_name'];
     $service_description = $_POST['service_description'];
     $service_type = $_POST['service_type'];
     $service_price = $_POST['service_price'];
     $product_status = 'true';
 
-
     // Access images
     $service_image = $_FILES['service_image']['name'];
-
-
     // Accessing temp names
     $temp_service_image = $_FILES['service_image']['tmp_name'];
 
@@ -23,16 +19,18 @@ if (isset($_POST['insert_product'])) {
         echo "<script>alert ('Please fill all the fields') </script>";
     } else {
         // Move uploaded files
-        move_uploaded_file($temp_service_image, "./product_images/$service_image");
+        move_uploaded_file($temp_service_image, "../product_images/$service_image");
 
 
         // Insert query for products
-        $insert_product = "INSERT INTO `insert_pet` (product_title, product_description, product_keywords, category_id, brand_id, product_image1,  product_price) VALUES ('$product_title', '$product_description', '$product_KeyWords', '$product_category_json', '$product_Image1', '$product_price',`NOW()`,'$product_status')";
+        $insert_service = "INSERT INTO `pet_services` (user_id,  service_title, service_specailization, service_description, service_image, service_price) 
+        VALUES ('$username', '$service_name' , '$service_type' , '$service_description', '$service_image', '$service_price',`NOW()`,'$product_status')";
 
-        mysqli_query($con, $insert_product);
-        $product_id = mysqli_insert_id($con);
+        mysqli_query($con, $insert_service);
+        $service_id = mysqli_insert_id($con);
 
         echo "<script>alert('Product has been inserted successfully')</script>";
+        echo $insert_service . "<br>" . mysqli_error($con);
     }
 }
 ?>
@@ -62,8 +60,8 @@ if (isset($_POST['insert_product'])) {
         <!-- Description -->
         <div class="form-outline mb-4 w-50 m-auto">
             <label for="service_description" class="form-label">Discription<span class="red">*</span></label>
-            <input type="text" name="service_description" id="service_description" class="form-control"
-                placeholder="Write the details here:....." autocomplete="off" required="required">
+            <textarea type="text" name="service_description" id="service_description" class="form-control"
+                placeholder="Write the details here:....." autocomplete="off" required="required"></textarea>
         </div>
 
 

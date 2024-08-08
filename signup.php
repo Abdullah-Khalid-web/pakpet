@@ -19,7 +19,8 @@ if (isset($_POST['submit_registert'])) {
     $picturetemp = $_FILES['picture']['tmp_name'];
 
     if (($password == $cpassword) && !$exists) {
-        $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`,`user_pic`, `user_email`,`user_phoneno`,`user_address`, `user_password`) VALUES ('$fname', '$lname','$picture', '$email','$phoneno','$address', '$password')";
+        $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`,`user_pic`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
+        VALUES ('$fname', '$lname','$picture', '$email','$phoneno','$address', '$password')";
 
         if (mysqli_query($con, $sql)) {
             move_uploaded_file($temp_Image1, "./product_images/$picturetemp");

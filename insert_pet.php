@@ -2,39 +2,41 @@
 include 'connection.php';
 
 if (isset($_POST['insert_pet'])) {
-    // need to make the user id refrence
-    // 
+
+    $username = $_SESSION['fname'];
     $pet_title = $_POST['pet-title'];
     $pet_age = $_POST['pet_age'];
     $pet_type = $_POST['pet_type'];
     $pet_bread = $_POST['pet_bread'];
     $pet_description = $_POST['pet_description'];
-    $pet_price = $_POST['product_price'];
-    $product_status = 'true';
-
+    $pet_price = $_POST['pet_price'];
+    $pet_status = 'true';
 
     // Access images
     $pet_image = $_FILES['pet_image']['name'];
 
 
     // Accessing temp names
-    $pet_image = $_FILES['pet_image']['tmp_name'];
+    $temp_pet_image = $_FILES['pet_image']['tmp_name'];
 
     // Checking empty condition
-    if (empty($pet_title) || empty($pet_age) || empty($pet_type) || empty($pet_bread) || empty($product_price) || empty($pet_image) || empty($pet_price)) {
+    if (empty($pet_title) || empty($pet_age) || empty($pet_type) || empty($pet_bread)  || empty($pet_image) || empty($pet_price)) {
         echo "<script>alert ('Please fill all the fields') </script>";
+        
     } else {
         // Move uploaded files
-        move_uploaded_file($temp_Image1, "./product_images/$pet_image");
+        move_uploaded_file($temp_pet_image, "product_images/$pet_image");
 
 
         // Insert query for products
-        $insert_product = "INSERT INTO `insert_pet` (product_title, product_description, product_keywords, category_id, brand_id, product_image1,  product_price) VALUES ('$product_title', '$product_description', '$product_KeyWords', '$product_category_json', '$product_Image1', '$product_price',`NOW()`,'$product_status')";
+        $insert_pet = "INSERT INTO `pet_insert` (user_id,	pet_title,	pet_type,	pet_bread,	pet_age,	pet_discription,		pet_price) 
+        VALUES ('$username', '$pet_title',  '$pet_type', '$pet_bread', '$pet_age', '$pet_description', '$pet_price')";
 
-        mysqli_query($con, $insert_product);
-        $product_id = mysqli_insert_id($con);
+        mysqli_query($con, $insert_pet);
+        $pet_id = mysqli_insert_id($con);
 
         echo "<script>alert('Product has been inserted successfully')</script>";
+        echo "Error: " . $insert_pet . "<br>" . mysqli_error($con);
     }
 }
 ?>
