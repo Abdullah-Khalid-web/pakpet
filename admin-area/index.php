@@ -43,6 +43,8 @@
 
 session_start();
 $_SESSION['fname'] = 'Admin Abdullah ';
+$_SESSION['email'] = 'abdullahkahlid2448@gmail.com';
+$_SESSION['user_id'] = '000';
 ?>
 
 <body>
@@ -76,6 +78,8 @@ $_SESSION['fname'] = 'Admin Abdullah ';
                 <p class="text-light text-center">
                     <?php
                     $username = $_SESSION['fname'];
+                    $useremail = $_SESSION['email'];
+                
                     echo htmlspecialchars($username);
                     ?>
                 </p>

@@ -11,6 +11,17 @@ session_start();
     <title>Pak Pet</title>
     <link rel="stylesheet" href="style.css">
 
+    <meta property="og:title" content="Pakpet">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png.png">
+    <meta property="og:url" content="https:">
+    <meta property="og:description" content="This is a website for the Pet Lovers to buy and sell the pets, thier products and provide Different types od services to others ">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Pakpet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +37,27 @@ session_start();
             padding: 0;
             margin: 0;
         }
+        
+        .bg-pri{
+            background-color: var(--primary-color);
+        }
+        .bg-sec{
+            background-color: var(--secondary-color);
+        }
+        .bg-pri:hover{
+            background-color: var(--secondary-color);
+            transition: 0.3s;
+        }
+        .bg-sec:hover{
+            transition: 0.3s;
+            background-color: var(--primary-color);
+        }
+        .text-pri{
+            color: var(--primary-color);
+        }
+        .text-sec{
+            color: var(--secondary-color);
+        }
 
         .red {
             color: red;
@@ -35,6 +67,14 @@ session_start();
             width: 10px;
         }
 
+        .hoverA{
+            color : #ffffff;
+            text-decoration: none;
+        }
+        .hoverA:hover{
+            transition: 0.3s;
+            color : lightblue ;
+        }
         header {
             background-color: var(--primary-color);
             color: white;
@@ -143,14 +183,14 @@ session_start();
             max-width: 360px;
             margin: 0 auto;
             display: flex;
-            align-items: end;
+            align-items: center;
             justify-content: center;
             flex-direction: column;
             padding: 10px;
             margin: 30px 10px;
             border: 1px solid lightgray;
             border-radius: 8px;
-
+            flex-wrap: wrap;
         }
 
         .container-box h2 {
@@ -163,6 +203,7 @@ session_start();
             width: 100%;
             height: 250px;
             margin-bottom: 10px;
+            object-fit:cover;
         }
 
 
@@ -180,16 +221,17 @@ session_start();
         }
 
         .porduct-box {
-            max-width: 268px;
+            max-width: 260px;
             margin: 0 auto;
             display: flex;
-            align-items: end;
+            align-items: center;
             justify-content: center;
             flex-direction: column;
             padding: 10px;
-            margin: 30px 10px;
+            margin: 5px;
             border: 1px solid lightgray;
             border-radius: 8px;
+            flex-wrap: wrap;
 
         }
 
@@ -212,7 +254,7 @@ session_start();
             border-radius: 15px;
             width: 100%;
             height: 180px;
-            object-fit: contain;
+            object-fit: cover;
 
             margin-bottom: 10px;
         }
@@ -376,10 +418,6 @@ session_start();
 
 
 
-
-
-
-
         /* LOGIN SIGN Up */
     </style>
 </head>
@@ -388,7 +426,8 @@ session_start();
     <header class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand active head-button" href="index.php"><img class="logopic " src="images/logo.png" alt=""> PAKPET</a>
+                <a class="navbar-brand active head-button" href="index.php"><img class="logopic " src="images/logo.png"
+                        alt=""> PAKPET</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -400,9 +439,10 @@ session_start();
                             <a class="nav-link active head-button" href="products.php">Buy Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link head-button active" aria-current="page" href="sell_things.php">Sell Products</a>
+                            <a class="nav-link head-button active" aria-current="page" href="insert_product.php">Sell
+                                Products</a>
                         </li>
-                        <li class="nav-item dropdown active head-button">
+                        <!-- <li class="nav-item dropdown active head-button">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -414,9 +454,12 @@ session_start();
                                 </li>
                                 <li><a class="dropdown-item" href="sell_things.php">Sell Product</a></li>
                             </ul>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link active head-button" href="contactus.php#Contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active head-button" href="contactus.php">Contact</a>
+                            <a class="nav-link active head-button" href="contactus.php#About">About</a>
                         </li>
                     </ul>
                     <div class="d-flex align-items-center">
@@ -428,12 +471,13 @@ session_start();
                         } else {
                             // User is logged in
                             $username = $_SESSION['fname'];
+                            $user_id = $_SESSION['user_id'];
                             echo '<a href="cart.php" class="btn btn-outline-dark me-2" type="button">Go to Cart</a>
-                                <div class="dropdown ms-3">
+                                <div class="dropdown">
                                 <a class="btn btn-dark text-white btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($username) . '</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Go to Cart</a></li>
-                                    <li><a class="dropdown-item" href="user_profile.php"> ' . htmlspecialchars($username) . '`s Profile </a></li>
+                                    <li><a class="dropdown-item" href="user_profile.php"> ' . htmlspecialchars($username) . ' userId : '  . htmlspecialchars($user_id) .'`s Profile </a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                                 </ul>

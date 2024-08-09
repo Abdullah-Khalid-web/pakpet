@@ -3,23 +3,29 @@ include 'connection.php';
 if (isset($_POST['submit_login'])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $sql = "SELECT * from user_registeration where user_email = '$email' AND user_password = '$password' ";
+    echo "Error: " . $sql . "<br>" . mysqli_error($con);
+    $result = mysqli_query($con, $sql);
     
-    $exists = false;
+    if (mysqli_query($con, $sql)) {
+        $row = mysqli_fetch_assoc($result);
+        session_start();
+        
+        $_SESSION['fname'] = $row['user_fname']; 
+        $_SESSION['email'] = $row['user_email']; 
 
-    if (!$exists) {
-        $sql = "SELECT * from `user_registeration` where user_email = '$email' && user_password = '$password' ";
+        $sql = "SELECT * FROM `user_registeration` where user_email ='$user_email' ";
+        $result = mysqli_query($con, $sql);
+        $row_data = mysqli_fetch_assoc($result);
+        $user_id = $row_data['user_id'];
 
-        if (mysqli_query($con, $sql)) {
-            session_start();
-            $_SESSION['fname'] = $fname; // Replace $fname with the actual variable holding the first name
-            $_SESSION['lname'] = $lname; // Replace $lname with the actual variable holding the last name
-
-            header("Location: index.php");
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($con);
-        }
+        $_SESSION['user_id'] = $user_id;
+        header("Location: index.php");
+    } else {
+        echo "Wrong Name or Password ";
     }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -182,9 +188,9 @@ if (isset($_POST['submit_login'])) {
 
 <body><br><br><br>
     <center>
-        <form class="form" method="post" action="process_login.php">
-            <p class="title">login </p>
-            <p class="message">Wellcome back! Sir, have a nice day </p>
+        <form class="form" method="post">
+            <p class="title">Log In </p>
+            <p class="message ">Well come back! </p>
 
             <label>
                 <input class="input" type="email" placeholder="" required="" id="email" name="email">
@@ -195,8 +201,9 @@ if (isset($_POST['submit_login'])) {
                 <input class="input" type="password" placeholder="" required="" id="password" name="password">
                 <span>Password</span>
             </label>
+            <!-- <p >Forget Password</p> -->
             <button class="submit" name="submit_login">Log In</button>
-            <p class="signin">have On acount ? <a href="signup.php">Register</a> </p>
+            <p class="signin">I have an acount ? <a href="signup.php">Register</a> </p>
 
 
 

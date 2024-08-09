@@ -1,5 +1,5 @@
     <footer>
-        <div class="footer-content py-3">
+        <div class="footer-content container py-3">
             <div class="footer-logo ">
                 <p>
                 <a class="navbar-brand" href="index.php"><img class="logopic" src="images/logo.png" alt=""> PAKPET</a>
@@ -9,18 +9,18 @@
                 <p>&copy; Pakpet</p>
             </div>
             <div class="footer-links">
-                <a href="#Home">Home</a>
-                <a href="#">Pet Sell</a>
-                <a href="#">Pet Buy</a>
-                <a href="#About">About Us</a>
-                <a href="#Contact">Contact</a>
+                <a href="index.php">Home</a>
+                <a href="sell_things.php">Pet Sell</a>
+                <a href="products.php">Pet Buy</a>
+                <a href="contactus.php#About">About Us</a>
+                <a href="contactus.php#Contact">Contact</a>
             </div>
             <div class="footer-info">
-                <p>Sell the Pet</p>
-                <p>Buy the Pet</p>
-                <p>Give the Pet Services</p>
-                <p>Vist Clinic or Nutrishinist</p>
-                <p>Pet Assecories</p>
+                <p> <a class=" hoverA" href="sell_things.php"> Sell the Pet</a></p>
+                <p> <a class=" hoverA" href="products.php"> Buy the Pet</a></p>
+                <p> <a class=" hoverA" href="view_pets_products"> Pets </a></p>
+                <p> <a class=" hoverA" href="view_pets_products"> Pet Products</a></p>
+                <p> <a class=" hoverA" href="sell_things.php"> Vist Clinic or Nutrishinist</a></p>
             </div>
         </div>
     </footer>

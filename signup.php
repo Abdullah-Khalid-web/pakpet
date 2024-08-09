@@ -19,17 +19,23 @@ if (isset($_POST['submit_registert'])) {
     $picturetemp = $_FILES['picture']['tmp_name'];
 
     if (($password == $cpassword) && !$exists) {
-        $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`,`user_pic`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
-        VALUES ('$fname', '$lname','$picture', '$email','$phoneno','$address', '$password')";
+        $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
+        VALUES ('$fname', '$lname', '$email','$phoneno','$address', '$password')";
+       
+       // $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`,`user_pic`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
+        // VALUES ('$fname', '$lname','$picture', '$email','$phoneno','$address', '$password')";
 
         if (mysqli_query($con, $sql)) {
             move_uploaded_file($temp_Image1, "./product_images/$picturetemp");
             session_start();
 
-            $_SESSION['fname'] = $fname; // Replace $fname with the actual variable holding the first name
-            $_SESSION['lname'] = $lname; // Replace $lname with the actual variable holding the last name
+            $_SESSION['fname'] = $fname;
+            $_SESSION['email'] = $email;
 
-            $user_id = "SELECT user_id from( select * from `user_registeration` where fnames = $fname) ";
+            $sql = "SELECT * FROM `user_registeration` where user_email ='$user_email' ";
+            $result = mysqli_query($con, $sql);
+            $row_data = mysqli_fetch_assoc($result);
+            $user_id = $row_data['user_id'];
 
             $_SESSION['user_id'] = $user_id;
 
@@ -48,7 +54,7 @@ if (isset($_POST['submit_registert'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign up</title>
 
     <style>
         :root {
@@ -224,10 +230,10 @@ if (isset($_POST['submit_registert'])) {
                     </label>
                 </div>
 
-                <label>
+                <!-- <label>
                     <input class="input inp_file" type="file" placeholder="" required="" id="picture" name="picture">
                     <span>Picture</span>
-                </label>
+                </label> -->
 
                 <label>
                     <input class="input" type="email" placeholder="" required="" id="email" name="email">
