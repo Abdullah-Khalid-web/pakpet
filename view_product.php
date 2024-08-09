@@ -20,13 +20,13 @@
             echo " 
                 <a class='nav-link text-center' href='product_details.php?product_id=$product_id'>
                     <div class='porduct-box'>
-                        <img  class='p-0 m-0' src='images/cat-8198720_640.webp' >
+                        <img class='p-0 m-0' src='product_images/" . htmlspecialchars($product_image) . "' alt='Product Image'>
                         <h3 class='p-0 m-0'>$product_title</h3>
                         <p class='m-0'> Type : $product_type </p>
                         <p class='m-0'>Price : $product_price   </p>
                         <p  >Date : $product_date </p>
                         <div class='button1'>
-                        <a class='btn mx-1  addtocart'>Add to cart</a>
+                        <a href='delete_product.php?product_id=$product_id' class='btn mx-1 addtocart'>Remove</a>
                         <a href='product_details.php?product_id=$product_id' class='btn   butt'>More info 
                             <svg height='24' width='24' viewBox='0 0 24 24'xmlns='http://www.w3.org/2000/svg'>
                             <path d='M0 0h24v24H0z' fill='none'></path>

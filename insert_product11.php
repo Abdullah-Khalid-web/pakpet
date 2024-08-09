@@ -14,8 +14,8 @@
         <?php
         echo '
                 <div class="form-outline mb-4 w-50 m-auto">
-                <label for="product-category" class="form-label ">Choose the Category <span class="red">*</span></label>
-                <select name="product-category" onclick="reload()" class="form-select" id="product-category" class="product-category">';
+                <label for="product_category" class="form-label ">Choose the Category <span class="red">*</span></label>
+                <select name="product_category" onclick="reload()" class="form-select" id="product_category" class="product_category">';
 
         $select_categories = "SELECT * from `category`";
         $result_categories = mysqli_query($con, $select_categories);

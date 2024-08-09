@@ -42,9 +42,9 @@
 
 
 session_start();
-$_SESSION['fname'] = 'Admin Abdullah ';
-$_SESSION['email'] = 'abdullahkahlid2448@gmail.com';
-$_SESSION['user_id'] = '000';
+$_SESSION['fname'] = 'Admin';
+$_SESSION['email'] = 'pakpet@gmail.com';
+$_SESSION['user_id'] = '1';     
 ?>
 
 <body>

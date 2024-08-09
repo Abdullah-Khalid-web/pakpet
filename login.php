@@ -1,33 +1,4 @@
-<?php
-include 'connection.php';
-if (isset($_POST['submit_login'])) {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $sql = "SELECT * from user_registeration where user_email = '$email' AND user_password = '$password' ";
-    echo "Error: " . $sql . "<br>" . mysqli_error($con);
-    $result = mysqli_query($con, $sql);
-    
-    if (mysqli_query($con, $sql)) {
-        $row = mysqli_fetch_assoc($result);
-        session_start();
-        
-        $_SESSION['fname'] = $row['user_fname']; 
-        $_SESSION['email'] = $row['user_email']; 
-
-        $sql = "SELECT * FROM `user_registeration` where user_email ='$user_email' ";
-        $result = mysqli_query($con, $sql);
-        $row_data = mysqli_fetch_assoc($result);
-        $user_id = $row_data['user_id'];
-
-        $_SESSION['user_id'] = $user_id;
-        header("Location: index.php");
-    } else {
-        echo "Wrong Name or Password ";
-    }
-}
-
-
-?>
+<?php include 'connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -183,10 +154,19 @@ if (isset($_POST['submit_login'])) {
                 opacity: 0;
             }
         }
+
+        .wrong {
+            animation: pulse 0.3s;
+            text-align: center;
+            color: red;
+            font-size: 1.3rem;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 
-<body><br><br><br>
+<body><br><br>
     <center>
         <form class="form" method="post">
             <p class="title">Log In </p>
@@ -207,6 +187,31 @@ if (isset($_POST['submit_login'])) {
 
 
 
+
+            <?php
+            $error = '';
+            if (isset($_POST['submit_login'])) {
+                $email = $_POST["email"];
+                $password = $_POST["password"];
+                $sql = "SELECT * from user_registeration where user_email = '$email' AND user_password = '$password' ";
+                $result = mysqli_query($con, $sql);
+
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    session_start();
+
+                    $_SESSION['fname'] = $row['user_fname'];
+                    $_SESSION['email'] = $row['user_email'];
+                    $_SESSION['user_id'] = $row['user_id'];
+
+                    header("Location: index.php");
+                } else {
+                    echo "<p class='wrong' > Wrong Name or Password </p>";
+                }
+            }
+
+
+            ?>
         </form>
     </center>
 </body>

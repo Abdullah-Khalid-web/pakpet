@@ -1,50 +1,5 @@
 <?php
 include 'connection.php';
-if (isset($_POST['submit_registert'])) {
-    $fname = $_POST["fnames"];
-    $lname = $_POST["lnames"];
-    $email = $_POST["email"];
-    $phoneno = $_POST["phoneno"];
-    $address = $_POST["address"];
-    $password = $_POST["password"];
-    $cpassword = $_POST["cpassword"];
-
-    $exists = false;
-
-    // Access images
-    $picture = $_FILES['picture']['name'];
-
-
-    // Accessing temp names
-    $picturetemp = $_FILES['picture']['tmp_name'];
-
-    if (($password == $cpassword) && !$exists) {
-        $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
-        VALUES ('$fname', '$lname', '$email','$phoneno','$address', '$password')";
-       
-       // $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`,`user_pic`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
-        // VALUES ('$fname', '$lname','$picture', '$email','$phoneno','$address', '$password')";
-
-        if (mysqli_query($con, $sql)) {
-            move_uploaded_file($temp_Image1, "./product_images/$picturetemp");
-            session_start();
-
-            $_SESSION['fname'] = $fname;
-            $_SESSION['email'] = $email;
-
-            $sql = "SELECT * FROM `user_registeration` where user_email ='$user_email' ";
-            $result = mysqli_query($con, $sql);
-            $row_data = mysqli_fetch_assoc($result);
-            $user_id = $row_data['user_id'];
-
-            $_SESSION['user_id'] = $user_id;
-
-            header("Location: index.php");
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($con);
-        }
-    }
-}
 
 ?>
 
@@ -206,14 +161,20 @@ if (isset($_POST['submit_registert'])) {
             }
         }
 
-        .inp_file {}
-    </style>
+        .wrong {
+            animation: pulse 0.3s ; 
+            text-align: center;
+            color: red;
+            font-size: 1.3rem;
+            margin: 0;
+            padding: 0;
+        }
+            </style>
 </head>
 
 <body>
     <div class="loginpop">
-
-        <br><br><br>
+<br>
         <center>
             <form class="form" method="post" enctype="multipart/form-data">
                 <p class="title">Register </p>
@@ -260,6 +221,72 @@ if (isset($_POST['submit_registert'])) {
                 </label>
                 <button class="submit" name="submit_registert">Submit</button>
                 <p class="signin">Already have an acount ? <a href="login.php">Signin</a> </p>
+
+<?php
+
+$error = '';
+if (isset($_POST['submit_registert'])) {
+    $fname = $_POST["fnames"];
+    $lname = $_POST["lnames"];
+    $email = $_POST["email"];
+    $phoneno = $_POST["phoneno"];
+    $address = $_POST["address"];
+    $password = $_POST["password"];
+    $cpassword = $_POST["cpassword"];
+
+    $exists = false;
+
+    // // Access images
+    // $picture = $_FILES['picture']['name'];
+
+    // // Accessing temp names
+    // $picturetemp = $_FILES['picture']['tmp_name'];
+
+    // Check if passwords match
+    if ($password !== $cpassword) {
+        $error = "Passwords do not match.";
+    } else { 
+        // Check if email or phone number already exists
+        $sql_check = "SELECT * FROM user_registeration WHERE user_email = '$email' ";
+        $result_check = mysqli_query($con, $sql_check);
+        $sql_check1 = "SELECT * FROM user_registeration WHERE user_phoneno = '$phoneno'";
+        $result_check1 = mysqli_query($con, $sql_check1);
+
+        if (mysqli_num_rows($result_check) > 0) {
+            echo "<p class='wrong' >Email  already in use.</p>";
+        }
+        if (mysqli_num_rows($result_check1) > 0) {
+            echo "<p class='  wrong' >Phone Number already in use.</p>";
+        }
+        else {
+            $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
+            VALUES ('$fname', '$lname', '$email','$phoneno','$address', '$password')";
+       
+       // $sql = "INSERT INTO `user_registeration` (`user_fname`, `user_lname`,`user_pic`, `user_email`,`user_phoneno`,`user_address`, `user_password`) 
+        // VALUES ('$fname', '$lname','$picture', '$email','$phoneno','$address', '$password')";
+
+        if (mysqli_query($con, $sql)) {
+            move_uploaded_file($temp_Image1, "./product_images/$picturetemp");
+            session_start();
+
+            $_SESSION['fname'] = $fname;
+            $_SESSION['email'] = $email;
+
+            $sql = "SELECT * FROM `user_registeration` where user_email ='$user_email' ";
+            $result = mysqli_query($con, $sql);
+            $row_data = mysqli_fetch_assoc($result);
+            $user_id = $row_data['user_id'];
+
+            $_SESSION['user_id'] = $user_id;
+
+            header("Location: index.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($con);
+        }
+    }
+}}
+
+?>
 
             </form>
         </center>

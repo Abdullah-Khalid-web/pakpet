@@ -15,7 +15,8 @@ session_start();
     <meta property="og:type" content="website">
     <meta property="og:image" content="images/logo.png.png">
     <meta property="og:url" content="https:">
-    <meta property="og:description" content="This is a website for the Pet Lovers to buy and sell the pets, thier products and provide Different types od services to others ">
+    <meta property="og:description"
+        content="This is a website for the Pet Lovers to buy and sell the pets, thier products and provide Different types od services to others ">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Pakpet">
     <meta charset="UTF-8">
@@ -30,32 +31,47 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
     <style>
         :root {
             --primary-color: #4A919E;
             --secondary-color: #1a5f6b;
             padding: 0;
             margin: 0;
+            font-family: 'Roboto', sans-serif;
+
         }
-        
-        .bg-pri{
+
+        .bg-lightgray {
+            background-color: #f7f7f7;
+        }
+
+        .bg-pri {
             background-color: var(--primary-color);
         }
-        .bg-sec{
+
+        .bg-sec {
             background-color: var(--secondary-color);
         }
-        .bg-pri:hover{
+
+        .bg-pri:hover {
             background-color: var(--secondary-color);
             transition: 0.3s;
         }
-        .bg-sec:hover{
+
+        .bg-sec:hover {
             transition: 0.3s;
             background-color: var(--primary-color);
         }
-        .text-pri{
+
+        .text-pri {
             color: var(--primary-color);
         }
-        .text-sec{
+
+        .text-sec {
             color: var(--secondary-color);
         }
 
@@ -67,14 +83,16 @@ session_start();
             width: 10px;
         }
 
-        .hoverA{
-            color : #ffffff;
+        .hoverA {
+            color: #ffffff;
             text-decoration: none;
         }
-        .hoverA:hover{
+
+        .hoverA:hover {
             transition: 0.3s;
-            color : lightblue ;
+            color: lightblue;
         }
+
         header {
             background-color: var(--primary-color);
             color: white;
@@ -203,7 +221,7 @@ session_start();
             width: 100%;
             height: 250px;
             margin-bottom: 10px;
-            object-fit:cover;
+            object-fit: cover;
         }
 
 
@@ -288,6 +306,78 @@ session_start();
             background-color: var(--secondary-color);
             color: white;
 
+        }
+
+
+
+
+
+
+        /* PRoduct Detail Page */
+        .product_detail {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 2px #ddd solid;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+}
+
+.product_detail div {
+    flex: 1 1 45%; /* Ensures each div takes up nearly equal space */
+    margin: 10px;
+    box-sizing: border-box; /* Prevents padding from affecting width */
+}
+
+@media screen and (max-width: 768px) {
+    .product_detail {
+        flex-direction: column; /* Stacks divs vertically */
+    }
+
+    .product_detail div {
+        flex: 1 1 100%; /* Each div takes up full width */
+        margin: 5px 0;  /* Adjust margin to avoid merging */
+    }
+}
+
+        .product_detail img {
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            /* Optional: limits the maximum size */
+            object-fit: cover;
+            /* max-width: 500px;
+            max-height: 370px;
+            object-fit: cover; */
+        }
+
+        /* @media screen and (max-width: 550px) {
+            .product_detail img {
+                max-width: 250px;
+                max-height: 180px;
+                object-fit: cover;
+            }
+        } */
+
+        .product-detail h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .product-detail h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .product-detail p {
+            font-size: 1.1rem;
+        }
+
+        .seller-info h4 {
+            font-size: 1.5rem;
         }
 
 
@@ -477,7 +567,7 @@ session_start();
                                 <a class="btn btn-dark text-white btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($username) . '</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Go to Cart</a></li>
-                                    <li><a class="dropdown-item" href="user_profile.php"> ' . htmlspecialchars($username) . ' userId : '  . htmlspecialchars($user_id) .'`s Profile </a></li>
+                                    <li><a class="dropdown-item" href="user_profile.php"> ' . htmlspecialchars($username) . ' userId : ' . htmlspecialchars($user_id) . '`s Profile </a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                                 </ul>
