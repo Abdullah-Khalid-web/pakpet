@@ -1,9 +1,15 @@
 <?php
 session_start();
-session_unset(); // Unset all session variables
-session_destroy(); // Destroy the session
+$_SESSION = array();
 
-// Redirect to the login page or any other page after logout
+if (session_id() != "" || isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), '', time() - 3600, '/');
+}
+session_destroy();
+
+if (isset($_COOKIE['user_id'])) {
+    setcookie('user_id', '', time() - 3600, '/'); 
+}
 header("Location: index.php");
 exit();
 ?>

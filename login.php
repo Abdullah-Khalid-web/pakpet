@@ -1,4 +1,42 @@
 <?php include 'connection.php'; ?>
+<?php
+$error = '';
+if (isset($_POST['submit_login'])) {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    
+    // Fetch the stored hashed password from the database
+    $sql = "SELECT * FROM user_registeration WHERE user_email = '$email'";
+    $result = mysqli_query($con, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $stored_hashed_password = $row['user_password'];
+
+        // Verify the entered password with the stored hashed password
+        if (password_verify($password, $stored_hashed_password)) {
+            session_start();
+
+            $_SESSION['fname'] = $row['user_fname'];
+            $_SESSION['email'] = $row['user_email'];
+            $_SESSION['user_id'] = $row['user_id'];
+
+            // Set a cookie for persistent login (valid for 30 days)
+            setcookie('user_id', $row['user_id'], time() + (86400 * 30), "/"); // 86400 = 1 day
+
+            // Send a success response
+            echo "<script>window.location.href = 'index.php';</script>";
+        } else {
+            echo "<p class='wrong' >Wrong Name or Password</p>";
+        }
+    } else {
+        echo "<p class='wrong' >Wrong Name or Password</p>";
+    }
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +57,7 @@
             flex-direction: column;
             gap: 10px;
             max-width: 350px;
-            padding: 50px;
+            padding: 10px 50px;
             border-radius: 20px;
             position: relative;
             background-color: var(--primary-color);
@@ -30,7 +68,7 @@
         .title {
             font-size: 28px;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: -1px;
             position: relative;
             display: flex;
             align-items: center;
@@ -126,6 +164,7 @@
             font-size: medium;
         }
 
+
         .submit {
             border: none;
             outline: none;
@@ -169,6 +208,7 @@
 <body><br><br>
     <center>
         <form class="form" method="post">
+
             <p class="title">Log In </p>
             <p class="message ">Well come back! </p>
 
@@ -184,34 +224,6 @@
             <!-- <p >Forget Password</p> -->
             <button class="submit" name="submit_login">Log In</button>
             <p class="signin">I have an acount ? <a href="signup.php">Register</a> </p>
-
-
-
-
-            <?php
-            $error = '';
-            if (isset($_POST['submit_login'])) {
-                $email = $_POST["email"];
-                $password = $_POST["password"];
-                $sql = "SELECT * from user_registeration where user_email = '$email' AND user_password = '$password' ";
-                $result = mysqli_query($con, $sql);
-
-                if ($result && mysqli_num_rows($result) > 0) {
-                    $row = mysqli_fetch_assoc($result);
-                    session_start();
-
-                    $_SESSION['fname'] = $row['user_fname'];
-                    $_SESSION['email'] = $row['user_email'];
-                    $_SESSION['user_id'] = $row['user_id'];
-
-                    header("Location: index.php");
-                } else {
-                    echo "<p class='wrong' > Wrong Name or Password </p>";
-                }
-            }
-
-
-            ?>
         </form>
     </center>
 </body>

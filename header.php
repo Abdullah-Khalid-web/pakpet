@@ -167,12 +167,18 @@ session_start();
 
         }
 
+        .afterheaderimagesearch button {
+            position: absolute;
+            top: 35%;
+            right: 5px;
+        }
+
         .afterheaderimagesearch img {
             position: absolute;
             right: 10px;
             top: 50%;
             transform: translateY(-50%);
-            width: 20px;
+            width: 35px;
             cursor: pointer;
         }
 
@@ -315,33 +321,38 @@ session_start();
 
         /* PRoduct Detail Page */
         .product_detail {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    border: 2px #ddd solid;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: white;
-}
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border: 2px #ddd solid;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+        }
 
-.product_detail div {
-    flex: 1 1 45%; /* Ensures each div takes up nearly equal space */
-    margin: 10px;
-    box-sizing: border-box; /* Prevents padding from affecting width */
-}
+        .product_detail div {
+            flex: 1 1 45%;
+            /* Ensures each div takes up nearly equal space */
+            margin: 10px;
+            box-sizing: border-box;
+            /* Prevents padding from affecting width */
+        }
 
-@media screen and (max-width: 768px) {
-    .product_detail {
-        flex-direction: column; /* Stacks divs vertically */
-    }
+        @media screen and (max-width: 768px) {
+            .product_detail {
+                flex-direction: column;
+                /* Stacks divs vertically */
+            }
 
-    .product_detail div {
-        flex: 1 1 100%; /* Each div takes up full width */
-        margin: 5px 0;  /* Adjust margin to avoid merging */
-    }
-}
+            .product_detail div {
+                flex: 1 1 100%;
+                /* Each div takes up full width */
+                margin: 5px 0;
+                /* Adjust margin to avoid merging */
+            }
+        }
 
         .product_detail img {
             width: 100%;
@@ -403,9 +414,10 @@ session_start();
             text-align: center;
             width: 100%;
             flex-wrap: wrap;
-            /* position: relative;
-            bottom: 0; */
-            /* margin-top: auto; */
+
+            position: relative;
+            bottom: 0;
+            margin-bottom: 0;
         }
 
         .footer-content {
@@ -493,22 +505,40 @@ session_start();
 
 
 
+        .popup,
+        .popup1 {
+            background-color: rgba(0, 0, 0, 0.336);
+            /* max-width: 550px; */
+            width: 80%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 10px;
+            border-radius: 10px;
+        }
 
+        .popup-content {
+            /* padding: 20px; */
+            border-radius: 5px;
+            position: relative;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* LOGIN SIGN Up */
+        .close-img {
+            position: absolute;
+            background-color: var(--primary-color);
+            top: -15px;
+            right: -15px;
+            cursor: pointer;
+            border-radius: 25%;
+            box-shadow: 6px 6px 29px -4px black;
+            width: 30px;
+            align-items: left;
+        }
     </style>
 </head>
 
@@ -554,31 +584,117 @@ session_start();
                     </ul>
                     <div class="d-flex align-items-center">
                         <?php
+                        // Check if the session is already started
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }
+
+                        // Check if the user is logged in by checking session or cookie
                         if (!isset($_SESSION['fname'])) {
                             // User is not logged in
-                            echo '<a class="btn btn-outline-dark me-2"  href="login.php">Login in</a>
-                            <a class="btn btn-dark text-white me-2" href="signup.php">Register</a>';
+                            if (isset($_COOKIE['user_id'])) {
+                                // If the session is not set but the cookie is set, log the user in automatically
+                                $user_id = $_COOKIE['user_id'];
+
+                                // Fetch the user data from the database using the user_id stored in the cookie
+                                $sql = "SELECT * FROM user_registeration WHERE user_id = '$user_id'";
+                                $result = mysqli_query($con, $sql);
+
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    $row = mysqli_fetch_assoc($result);
+
+                                    // Set session variables
+                                    $_SESSION['fname'] = $row['user_fname'];
+                                    $_SESSION['email'] = $row['user_email'];
+                                    $_SESSION['user_id'] = $row['user_id'];
+                                }
+                            }
+                        }
+
+                        if (!isset($_SESSION['fname'])) {
+                            // User is still not logged in
+                            echo '<a class="btn btn-outline-dark me-2" id="login_button" >Login</a>
+                                <a class="btn btn-dark text-white me-2" id="signup_button">Register</a>';
+
                         } else {
                             // User is logged in
-                            $username = $_SESSION['fname'];
-                            $user_id = $_SESSION['user_id'];
-                            echo '<a href="cart.php" class="btn btn-outline-dark me-2" type="button">Go to Cart</a>
-                                <div class="dropdown">
-                                <a class="btn btn-dark text-white btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">' . htmlspecialchars($username) . '</a>
+                            $username = htmlspecialchars($_SESSION['fname']);
+                            $user_id = htmlspecialchars($_SESSION['user_id']);
+                            echo '<a href="cart.php" class="btn btn-outline-dark me-2" type="button"> Go to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            <div class="dropdown">
+                                <a class="btn btn-dark text-white btn-outline-secondary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">' . $username . '</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Go to Cart</a></li>
-                                    <li><a class="dropdown-item" href="user_profile.php"> ' . htmlspecialchars($username) . ' userId : ' . htmlspecialchars($user_id) . '`s Profile </a></li>
+                                    <li><a class="dropdown-item" href="user_profile.php">' . $username . '`s Profile </a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                                 </ul>
-                                </div>';
+                            </div>';
                         }
                         ?>
                     </div>
+
+
                 </div>
             </div>
         </nav>
     </header>
-</body>
+    <div class="popup m-0">
+        <div class="popup-content m-0">
+            <?php include 'login.php' ?>
+            <img class="close-img close" src="Icons/x.png" alt="">
+        </div>
+    </div>
+    <div class="popup1 m-0" >
+        <div class="popup-content m-0">
+            <?php include 'signup.php' ?>
+            <img class="close-img close1" src="Icons/x.png" alt="">
+        </div>
+    </div>
+    <script>
+        // Function to open popups
+        function openPopup(popupClass) {
+            document.querySelector(popupClass).style.display = 'flex';
+        }
 
-</html>
+        // Function to close popups
+        function closePopup(popupClass) {
+            document.querySelector(popupClass).style.display = 'none';
+        }
+
+        // Event listeners for buttons
+        document.getElementById('login_button').addEventListener('click', function () {
+            openPopup('.popup');
+        });
+
+        document.getElementById('signup_button').addEventListener('click', function () {
+            openPopup('.popup1');
+        });
+
+        // Event listener for clicks outside of popups
+        document.addEventListener('click', function (event) {
+            const popups = document.querySelectorAll('.popup,.popup1');
+
+            // Check if the click was outside of any popup
+            if (!Array.from(popups).some(popup => popup.contains(event.target)) && !event.target.matches('#login_button, #signup_button')) {
+                popups.forEach(popup => closePopup(`.${popup.classList[0]}`));
+            }
+        });
+
+        // Prevent clicks inside popups from closing them
+        document.querySelectorAll('.popup, .popup1').forEach(popup => {
+            popup.addEventListener('click', function (event) {
+                event.stopPropagation();
+            });
+        });
+
+        document.querySelector(".close").addEventListener("click", function () {
+            closePopup('.popup');
+        });
+
+        document.querySelector(".close1").addEventListener("click", function () {
+            closePopup('.popup1');
+        });
+
+
+    </script>

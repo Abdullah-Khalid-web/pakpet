@@ -11,6 +11,7 @@ if (isset($_POST['insert_product'])) {
     $product_type = $_POST['product_type'];
     $product_description = $_POST['product_description'];
     $product_price = $_POST['product_price'];
+    $product_date = date('Y-m-d H:i:s'); 
     $product_status = 'true';
 
     // Access images
@@ -25,8 +26,8 @@ if (isset($_POST['insert_product'])) {
         move_uploaded_file($temp_product_image, "./product_images/$product_image");
 
         // Insert query for products
-        $insert_product = "INSERT INTO `pet_products` (user_id, product_title, product_type, product_quantity, product_image, product_description, product_price,  product_status) 
-                            VALUES ('$user_email', '$product_title', '$product_type', '$product_category', '$product_image', '$product_description', '$product_price', '$product_status')";
+        $insert_product = "INSERT INTO `pet_products` (user_id, product_title, product_type, product_quantity, product_image, product_description, product_price, product_status, product_date) 
+        VALUES ('$user_id', '$product_title', '$product_type', '$product_category', '$product_image', '$product_description', '$product_price', '$product_status', '$product_date')";
         // Execute the query
         if (mysqli_query($con, $insert_product)) {
             echo "<script>alert('Product has been inserted successfully')</script>";

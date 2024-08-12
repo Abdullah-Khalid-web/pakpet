@@ -288,10 +288,27 @@
         </div>
     </div>
 
-        <div class="contact-form">
-            <form action="" method="">
-                <div class="ff">
+        <?php   
+        if(isset($_POST['contact_submit'])){
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $message = $_POST['message'];
 
+            $sql = "INSERT into `contact` (name, email, message)
+            values ('$name','$email','$message')";
+            $result = mysqli_query($con, $sql);
+            if($result){
+                echo "<script>alert('Your message has been sent successfully')</script>";
+            }else{
+                echo "<script>alert('Your message not sent ')</script>";
+                }
+        }
+        ?> 
+
+        <div class="contact-form">
+            <form action="" method="post">
+                <h2 class="text-light">Feedback(Problem, Suggestion )</h2>
+                <div class="ff">
                     <div class="form-group ">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -306,7 +323,7 @@
                     <textarea id="message" name="message" rows="4" required></textarea>
                 </div>
                 <div class="form-group ">
-                    <input type="submit" value="Submit">
+                    <input type="submit" name="contact_submit" value="Submit">
                 </div>
             </form>
         </div>

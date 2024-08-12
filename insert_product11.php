@@ -14,12 +14,11 @@
         <?php
         echo '
                 <div class="form-outline mb-4 w-50 m-auto">
-                <label for="product_category" class="form-label ">Choose the Category <span class="red">*</span></label>
+                <label for="product_category" class="form-label ">Choose the City <span class="red">*</span></label>
                 <select name="product_category" onclick="reload()" class="form-select" id="product_category" class="product_category">';
 
-        $select_categories = "SELECT * from `category`";
+        $select_categories = "SELECT * FROM `category` ORDER BY `category_title` ASC";
         $result_categories = mysqli_query($con, $select_categories);
-
         while ($row_data = mysqli_fetch_assoc($result_categories)) {
             $categories_title = $row_data['category_title'];
             $categories_id = $row_data['category_id'];
@@ -49,6 +48,7 @@
                 <option>others</option>
             </select>
         </div>
+
 
         <!-- Image -->
         <div class="form-outline mb-4 w-50 m-auto my-2">

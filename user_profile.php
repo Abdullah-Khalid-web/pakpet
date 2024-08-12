@@ -62,7 +62,7 @@ if (isset($_POST['save_changes'])) {
                     . $user_fname . '`s Address : ' . $user_address .
                 '</label>
             </div>
-        
+            <h3 class="text-center text-sec"  >Edit Your Profile</h3>
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="user_fname" class="form-label">First Name : <span class="red">*</span></label>
                 <input type="text" name="user_fname" id="user_fname" class="form-control" placeholder="First Name" value="' . $user_fname . '"
@@ -98,14 +98,16 @@ if (isset($_POST['save_changes'])) {
 
     echo
         '<hr class= "p-1 bg-sec text-sec">
-        <h2 class= " text-sec text-center"> ' . $user_fname . ' ours Inserted Products</h2>
+        <h2 class= " text-sec text-center"> ' . $user_fname . ' our Products for sale</h2>
         <div class="container">
             <div class="porducts">';
 
     // Access Products
-    $product_sql = "SELECT * FROM `pet_products` where user_id ='$user_email' ";
+    $product_sql = "SELECT * FROM `pet_products` where user_id ='$user_id' ";
     $product_result = mysqli_query($con, $product_sql);
-
+    if(mysqli_fetch_assoc($product_result) == 0 ){
+        echo '<p class="text-center text-sec">No products inserted yet</p>';
+    }
 
     while ($row_data = mysqli_fetch_assoc($product_result)) {
 
@@ -128,6 +130,7 @@ if (isset($_POST['save_changes'])) {
                             <img class='p-0 m-0' src='product_images/" . htmlspecialchars($product_image) . "' alt='Product Image'>
                             <h3 class='p-0 m-0'>$product_title</h3>
                             <p class='m-0'> Type : $product_type </p>
+                            <p class='m-0'>City : $product_category   </p>
                             <p class='m-0'><b>Price : $product_price   </b></p>
                             <p  class='m-0'>Date : $product_date </p>
                             <div class='button1'>

@@ -1,3 +1,7 @@
+<?php
+include '../connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,16 +94,6 @@ $_SESSION['user_id'] = '1';
                 <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
                         class="nav-link text-light  my-1">View Product</a></button>
 
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert_pet"
-                        class="nav-link text-light my-1 ">Insert Pet</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
-                        class="nav-link text-light  my-1">View Pet</a></button>
-
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert_services"
-                        class="nav-link text-light my-1 ">Insert services</a></button>
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
-                        class="nav-link text-light  my-1">View services</a></button>
-
                 <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?insert-category"
                         class="nav-link text-light  my-1">Insert Category</a></button>
                 <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
@@ -110,16 +104,10 @@ $_SESSION['user_id'] = '1';
                 <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
                         class="nav-link text-light  my-1">View Pet Types</a></button>
 
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">All
-                        orders</a></button>
-
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?" class="nav-link text-light  my-1">All
-                        Payment</a></button>
-
                 <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
                         class="nav-link text-light  my-1">List User</a></button>
 
-                <button class="my-3 btn btn-info mb-4 m-auto"><a href="index.php?"
+                <button class="my-3 btn btn-info mb-4 m-auto"><a href="../logout.php"
                         class="nav-link text-light  my-1">Logout</a></button>
 
             </div>
@@ -132,14 +120,8 @@ $_SESSION['user_id'] = '1';
     <!-- Fourth Child -->
     <div class="container">
         <?php
-        if (isset($_GET['insert_pet'])) {
-            include '../insert_pet.php';
-        }
-        if (isset($_GET['insert_services'])) {
-            include '../insert_pet_services.php';
-        }
         if (isset($_GET['insert_product'])) {
-            include '../insert_pet_accessiores.php';
+            include '../insert_product11.php';
         }
         if (isset($_GET['insert-category'])) {
             include 'insert-category.php';
