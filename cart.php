@@ -6,31 +6,20 @@
         <div class="porducts">
 
 <?php
-
-        
-    // Get user_id from session
     $user_id = $_SESSION['user_id'];
-
-    // Fetch product IDs from the cart
     $select_Cart_items = "SELECT product_id FROM `cart` WHERE user_id = '$user_id'";
     $result_Cart_items = mysqli_query($con, $select_Cart_items);
-
-    // Initialize an array to hold product IDs
     $product_ids = [];
-
-    // Fetch product IDs into the array
     while ($row = mysqli_fetch_assoc($result_Cart_items)) {
         $product_ids[] = $row['product_id'];
     }
 
     if (!empty($product_ids)) {
-        // Convert array to a comma-separated string for SQL IN clause
         $product_ids_string = implode(',', array_map('intval', $product_ids));
 
-        // Fetch products from pet_products
         $select_Products = "SELECT * FROM `pet_products` WHERE product_id IN ($product_ids_string)";
         $result_Products = mysqli_query($con, $select_Products);
-
+        
         while ($row_data = mysqli_fetch_assoc($result_Products)) {
             $product_owner_id = $row_data['user_id'];
             $product_id = $row_data['product_id'];
@@ -65,8 +54,13 @@
             </a>
             ";
         }
+
+
     } else {
-        echo "<p>No items in cart.</p>";
+        echo "<p>No items in cart.</p>
+        <br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
+        ";
     }
 
     // Close the database connection

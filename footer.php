@@ -18,9 +18,9 @@
             <div class="footer-info">
                 <p> <a class=" hoverA" href="sell_things.php"> Sell the Pet</a></p>
                 <p> <a class=" hoverA" href="products.php"> Buy the Pet</a></p>
-                <p> <a class=" hoverA" href="view_pets_products"> Pets </a></p>
-                <p> <a class=" hoverA" href="view_pets_products"> Pet Products</a></p>
-                <p> <a class=" hoverA" href="sell_things.php"> Vist Clinic or Nutrishinist</a></p>
+                <p> <a class=" hoverA" href="products.php"> Pets </a></p>
+                <p> <a class=" hoverA" href="products.php"> Pet Products</a></p>
+                <p> <a class=" hoverA" href="products.php"> Vist Clinic or Nutrishinist</a></p>
             </div>
         </div>
     </footer>

@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+include 'product_display.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -249,7 +250,7 @@ session_start();
             margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: center;
+            /* justify-content: center; */
             flex-direction: column;
             padding: 10px;
             margin: 5px;
@@ -258,6 +259,8 @@ session_start();
             flex-wrap: wrap;
 
         }
+
+
 
         .porduct-box h3 {
             width: 100%;
@@ -285,7 +288,9 @@ session_start();
 
         .button1 {
             display: flex;
-            align-items: left;
+            align-items: center;
+            justify-content: center;
+            
         }
 
         .addtocart {
@@ -298,19 +303,30 @@ session_start();
             transition: 0.5s;
             background-color: orange;
             color: white;
-
         }
 
         .butt {
             background-color: var(--primary-color);
             color: white;
-
         }
 
         .butt:hover {
             transition: 0.5s;
             background-color: var(--secondary-color);
             color: white;
+        }
+
+        @media screen and (max-width: 600px) {
+            .porduct-box {
+                max-width: 160px;
+            }
+            .button1 {
+                flex-wrap: wrap;
+            }
+            .button1 a {
+                width: 100%;
+                margin-top: 5px;
+            }
 
         }
 
@@ -318,8 +334,7 @@ session_start();
 
 
 
-
-        /* PRoduct Detail Page */
+        /* Products-Detail Page */
         .product_detail {
             display: flex;
             flex-direction: row;
@@ -334,23 +349,18 @@ session_start();
 
         .product_detail div {
             flex: 1 1 45%;
-            /* Ensures each div takes up nearly equal space */
             margin: 10px;
             box-sizing: border-box;
-            /* Prevents padding from affecting width */
         }
 
         @media screen and (max-width: 768px) {
             .product_detail {
                 flex-direction: column;
-                /* Stacks divs vertically */
             }
 
             .product_detail div {
                 flex: 1 1 100%;
-                /* Each div takes up full width */
                 margin: 5px 0;
-                /* Adjust margin to avoid merging */
             }
         }
 
@@ -358,20 +368,8 @@ session_start();
             width: 100%;
             height: auto;
             max-width: 500px;
-            /* Optional: limits the maximum size */
             object-fit: cover;
-            /* max-width: 500px;
-            max-height: 370px;
-            object-fit: cover; */
         }
-
-        /* @media screen and (max-width: 550px) {
-            .product_detail img {
-                max-width: 250px;
-                max-height: 180px;
-                object-fit: cover;
-            }
-        } */
 
         .product-detail h2 {
             font-size: 2.5rem;
