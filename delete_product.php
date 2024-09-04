@@ -1,8 +1,8 @@
 <?php
-include 'connection.php'; // Make sure this includes your database connection
+include 'connection.php'; 
 
-if (isset($_POST['product_id'])) {
-    $product_id = $_POST['product_id'];
+if (isset($_GET['product_id'])) {
+    $product_id = $_GET['product_id'];
 
     // Validate product_id
     if (!empty($product_id) && is_numeric($product_id)) {

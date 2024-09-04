@@ -62,45 +62,47 @@
                     ";
 // The related products
 echo '<hr>
-<h3 class="text-center text-sec">Related Products Products </h3>
-        <div class="container p-0">
-        <div class="porducts">
-        '
-;
-$sql2 = "SELECT * FROM `pet_products` WHERE product_title LIKE '%$product_title%'";
+<h3 class="text-center text-sec">Related Products</h3>
+    <div class="container p-0">
+    <div class="products d-flex" > <!-- Corrected class name -->
+';
+
+$sql2 = "SELECT * FROM `pet_products` WHERE product_title LIKE '%" . mysqli_real_escape_string($con, $product_title) . "%'";
 $result2 = mysqli_query($con, $sql2);
-$row_data2 = mysqli_fetch_assoc($result2);
-if( mysqli_fetch_assoc($result2) == 0){
+
+if (!$result2) {
+    echo '<p class="text-center">Error fetching related products: ' . mysqli_error($con) . '</p>';
+} else if (mysqli_num_rows($result2) == 0) {
     echo '<p class="text-center">No related products found</p>';
+} else {
+    product_display($result2);
 }
-product_display($result2);
+
 echo '
-        </div>
     </div>
-        ';
-
-
-
+</div>
+';
 
 // The owner Other Products
-            echo '<hr>
-            <h3 class="text-center text-sec">'. $user_fname . $user_lname .' other Products </h3>
-                    <div class="container p-0">
-                    <div class="porducts">
-                    '
-            ;
-            $sql1 = "SELECT * FROM `pet_products` where user_id = '$product_owner_id'";
-            $result1 = mysqli_query($con, $sql1);
-            $row_data1 = mysqli_fetch_assoc($result1);
+echo '<hr>
+<h3 class="text-center text-sec"> This Saller (' . htmlspecialchars($user_fname) . ' ' . htmlspecialchars($user_lname) . ') other inserted Products</h3>
+    <div class="container p-0">
+    <div class="products d-flex"> <!-- Corrected class name -->
+';
 
-            product_display($result1);
+$sql1 = "SELECT * FROM `pet_products` WHERE user_id = '$product_owner_id'";
+$result1 = mysqli_query($con, $sql1);
 
-            echo '
-                    </div>
-                </div>
-                    ';
+if (!$result1) {
+    echo '<p class="text-center">Error fetching owner\'s products: ' . mysqli_error($con) . '</p>';
+} else {
+    product_display($result1);
+}
 
-
+echo '
+    </div>
+</div>
+';
             ?>
 
 

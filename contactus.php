@@ -269,9 +269,9 @@
         <h1 class="text-center text-pri">Contact Us</h1>
 
     <div class="row m-0">
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 text-center ">
             <h4>Email</h4>
-            <p><a href="mailto:info@pakpet.com">info@pakpet.com</a></p>
+            <p><a class="text-pri" href="mailto:info@pakpet.com">info@pakpet.com</a></p>
         </div>
         <div class="col-md-4 text-center">
             <h4>Phone</h4>
@@ -279,10 +279,10 @@
         </div>
         <div class=" contact-box col-md-4 text-center">
             <h4>Follow Us</h4>
-            <a href="https://instagram.com/pakpet" target="_blank" class="btn btn-outline-dark btn-sm m-1">
-                <i class="fab fa-instagram"></i> Instagram
+            <a href="https://instagram.com/pakpet" target="_blank" class="btn btn-outline-dark btn-sm m-1 bg-pri text-light">
+                <i class="fab fa-instagram "></i> Instagram
             </a>
-            <a href="https://facebook.com/pakpet" target="_blank" class="btn btn-outline-dark btn-sm m-1">
+            <a href="https://facebook.com/pakpet" target="_blank" class="btn btn-outline-dark btn-sm m-1 bg-pri text-light hover-text-pri">
                 <i class="fab fa-facebook-f"></i> Facebook
             </a>
         </div>

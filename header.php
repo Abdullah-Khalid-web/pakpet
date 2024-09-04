@@ -53,6 +53,9 @@ session_start();
         .bg-pri {
             background-color: var(--primary-color);
         }
+        .hover-text-pri{
+            color: var(--primary-color);   
+        }
 
         .bg-sec {
             background-color: var(--secondary-color);
@@ -97,6 +100,7 @@ session_start();
         header {
             background-color: var(--primary-color);
             color: white;
+            /* position: fixed; */
         }
 
         .logopic {
@@ -140,7 +144,7 @@ session_start();
             width: 50px;
         }
 
-        .afterheaderimage input::placeholder {
+        .afterheaderimagesearch input::placeholder {
             color: rgba(255, 255, 255, 0.7);
             /* Light white color */
         }
@@ -186,10 +190,6 @@ session_start();
         .afterheaderimagesearch img:hover {
             opacity: 0.7;
         }
-
-
-
-
 
 
 
