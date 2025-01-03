@@ -38,7 +38,7 @@
             echo "
             <div class='product_detail container'>
                 <div class='img'>
-                    <img  class='p-0 m-0' src='images/$product_image' >  
+                    <img class='p-0 m-0' src='product_images/" . htmlspecialchars($product_image) . "' alt='Product Image'>
                 </div>
                 <div>
                     <h2> $product_title</h2>

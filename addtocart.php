@@ -16,7 +16,7 @@ if (!isset($_SESSION['fname'])) {
         $product_id = $_GET['product_id'];
         $user_id = $_GET['user_id'];
         
-        if (!empty($product_id) && is_numeric($product_id)) {
+        if (!empty($product_id)) {
             // Prepare and execute the SQL statement
             $stmt = $con->prepare("INSERT INTO `cart` (user_id, product_id) VALUES (?, ?)");
             $stmt->bind_param("ii", $user_id, $product_id);

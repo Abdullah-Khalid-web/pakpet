@@ -38,7 +38,7 @@ session_start();
 
     <style>
         :root {
-            --primary-color: #4A919E;
+            --primary-color: #4A919a;
             --secondary-color: #1a5f6b;
             padding: 0;
             margin: 0;

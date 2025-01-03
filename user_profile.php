@@ -36,7 +36,7 @@ if (isset($_POST['save_changes'])) {
     $user_id = $row_data['user_id'];
     $user_fname = $row_data['user_fname'];
     $user_lname = $row_data['user_lname'];
-    $user_pic = $row_data['user_pic'];
+    // $user_pic = $row_data['user_pic'];
     $user_email = $row_data['user_email'];
     $user_phoneno = $row_data['user_phoneno'];
     $user_address = $row_data['user_address'];
